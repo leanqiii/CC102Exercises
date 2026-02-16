@@ -2,82 +2,85 @@
 using namespace std;
 
 int main() {
-    char repeat;
+
+    char again;
 
     do {
-        const int NUM_PRODUCTS = 5;
-        const int NUM_SALESPEOPLE = 4;
 
-        double sales[NUM_PRODUCTS][NUM_SALESPEOPLE] = {0};
+        int products = 5;
+        int salespeople = 4;
 
-        int salesperson, product;
-        double amount;
+        double sales[5][4];
+
+        for (int i = 0; i < products; i++) {
+            for (int j = 0; j < salespeople; j++) {
+                sales[i][j] = 0;
+            }
+        }
+
+        int sp, pr;
+        double amt;
         char choice;
 
         do {
-            cout << "\nEnter Salesperson (1-4): ";
-            cin >> salesperson;
+            cout << "\nEnter salesperson number (1-4): ";
+            cin >> sp;
 
-            cout << "Enter Product (1-5): ";
-            cin >> product;
+            cout << "Enter product number (1-5): ";
+            cin >> pr;
 
-            cout << "Enter Amount: ";
-            cin >> amount;
+            cout << "Enter sales amount: ";
+            cin >> amt;
 
-            if (salesperson >= 1 && salesperson <= NUM_SALESPEOPLE &&
-                product >= 1 && product <= NUM_PRODUCTS) {
-                sales[product - 1][salesperson - 1] += amount;
-            } else {
+            if (sp >= 1 && sp <= 4 && pr >= 1 && pr <= 5) {
+                sales[pr - 1][sp - 1] = sales[pr - 1][sp - 1] + amt;
+            }
+            else {
                 cout << "Invalid input.\n";
             }
 
-            cout << "Add another record? (y/n): ";
+            cout << "Do you want to enter another sale? (y/n): ";
             cin >> choice;
 
         } while (choice == 'y' || choice == 'Y');
 
-        cout << "\n===== MONTHLY SALES SUMMARY =====\n\n";
-
-        cout << "Product ";
-        for (int j = 0; j < NUM_SALESPEOPLE; j++)
-            cout << "SP" << j + 1 << " ";
-        cout << "Total\n";
+        cout << "\nSales Summary:\n";
 
         double grandTotal = 0;
 
-        for (int i = 0; i < NUM_PRODUCTS; i++) {
+        for (int i = 0; i < products; i++) {
+
             double rowTotal = 0;
+            cout << "Product " << i + 1 << ": ";
 
-            cout << i + 1 << "       ";
-
-            for (int j = 0; j < NUM_SALESPEOPLE; j++) {
+            for (int j = 0; j < salespeople; j++) {
                 cout << sales[i][j] << " ";
-                rowTotal += sales[i][j];
+                rowTotal = rowTotal + sales[i][j];
             }
 
-            cout << rowTotal << endl;
-            grandTotal += rowTotal;
+            cout << " | Total = " << rowTotal << endl;
+            grandTotal = grandTotal + rowTotal;
         }
 
-        cout << "Total   ";
+        cout << "\nSalesperson Totals:\n";
 
-        for (int j = 0; j < NUM_SALESPEOPLE; j++) {
+        for (int j = 0; j < salespeople; j++) {
+
             double colTotal = 0;
 
-            for (int i = 0; i < NUM_PRODUCTS; i++)
-                colTotal += sales[i][j];
+            for (int i = 0; i < products; i++) {
+                colTotal = colTotal + sales[i][j];
+            }
 
-            cout << colTotal << " ";
+            cout << "Salesperson " << j + 1 << ": " << colTotal << endl;
         }
 
-        cout << grandTotal << endl;
+        cout << "\nGrand Total: " << grandTotal << endl;
 
         cout << "\nRun the program again? (y/n): ";
-        cin >> repeat;
+        cin >> again;
 
-    } while (repeat == 'y' || repeat == 'Y');
-
-    cout << "Program ended.\n";
+    } while (again == 'y' || again == 'Y');
 
     return 0;
 }

@@ -1,37 +1,39 @@
 #include <iostream>
-
 using namespace std;
 
-int main () {
-
-    do {
-    int quiz, students;
+int main() {
+    int students, quizzes;
+    float scores[50][50];
     char choice;
 
-    cout<< "Enter number of students: ";
-    cin>> students;
+    do {
+        cout << "\n===== Quiz Average Calculator =====\n";
 
-    cout<< "Enter number of quizzes: ";
-    cin>> quiz;
+        cout << "Number of students: ";
+        cin >> students;
 
-    double scores [50][50];
+        cout << "Number of quizzes: ";
+        cin >> quizzes;
 
         for (int i = 0; i < students; i++) {
-            double sum = 0;
+            float total = 0;
 
-            cout<< "\nStudent " << i + 1 << " scores:\n";
+            cout << "\nEnter scores for Student #" << (i + 1) << endl;
 
-            for (int j = 0; j < quiz; j++) {
-                cin>> scores[i][j];
-                sum += scores[i][j];
+            for (int j = 0; j < quizzes; j++) {
+                cout << "Quiz " << (j + 1) << ": ";
+                cin >> scores[i][j];
+                total += scores[i][j];
             }
-            cout<< "Average: " << sum / quiz << endl;
+
+            float average = total / quizzes;
+            cout << "Student #" << (i + 1) << " Average: " << average << endl;
         }
 
-        cout<< "Do you want to do another? (Y/y): ";
-        cin>> choice;
+        cout << "Run program again? (y/n): ";
+        cin >> choice;
 
-    } while (choice == 'Y' || choice == 'y');
+    } while (choice == 'y' || choice == 'Y');
 
-        return 0;
+    return 0;
 }
